@@ -1,1 +1,1 @@
-# fantasy-apy
+# fantasy-api
