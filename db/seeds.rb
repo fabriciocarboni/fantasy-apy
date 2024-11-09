@@ -7,3 +7,18 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require 'faker'
+
+# Clear existing data
+User.destroy_all
+
+# Create users
+30.times do
+  User.create!(
+    name: Faker::Name.name,
+    email: Faker::Internet.unique.email,
+    approved: [true, false].sample  # Randomly assigns true or false
+  )
+end
+
+puts "Created 30 users with Faker!"

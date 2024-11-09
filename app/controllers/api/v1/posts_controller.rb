@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show update destroy ]
+  # add this when in productino skip_before_action :verify_authenticity_token
 
   # GET /posts
   def index
