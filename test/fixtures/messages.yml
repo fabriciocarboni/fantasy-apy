@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  from_id: 
+  to_id: 
+  status: 
+  text: MyText
+
+two:
+  from_id: 
+  to_id: 
+  status: 
+  text: MyText
