@@ -1,9 +1,11 @@
 class User < ApplicationRecord
   # Validations for user attributes
   validates :name, presence: true  # Ensures that each user has a name
-  validates :email, presence: true  # Ensures that each user has an email
+  validates :email, presence: true, uniqueness: true  # Ensures that each user has an email
   validates :approved, inclusion: { in: [true, false] }  # Ensures that the approved attribute is a boolean
-
+  validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
+  has_secure_password
+  
   # A user can create many posts
   has_many :posts, dependent: :destroy  # Deletes a user's posts if the user is deleted
 

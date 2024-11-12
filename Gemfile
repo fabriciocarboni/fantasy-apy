@@ -46,6 +46,8 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "faker"
+  gem 'bcrypt', '~> 3.1.7'
 end
 
 
+gem 'apipie-rails'

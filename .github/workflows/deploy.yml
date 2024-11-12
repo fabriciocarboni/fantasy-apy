@@ -1,0 +1,57 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.3.6
+
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install
+
+    - name: Run tests
+      run: |
+        bundle exec rspec
+
+    - name: Deploy to DigitalOcean
+      env:
+        HOST: ${{ secrets.DROPLET_HOST }}
+        USERNAME: ${{ secrets.DROPLET_USER }}
+        SSH_KEY: ${{ secrets.DROPLET_SSH_KEY }}
+      run: |
+        echo "$SSH_KEY" > deploy_key
+        chmod 600 deploy_key
+        rsync -avz -e "ssh -i deploy_key -o StrictHostKeyChecking=no" . $USERNAME@$HOST:~/your_app_directory
+        ssh -i deploy_key -o StrictHostKeyChecking=no $USERNAME@$HOST << 'ENDSSH'
+          # Navigate to your app directory
+          cd ~/your_app_directory
+          
+          # Update any needed environment variables
+          export RAILS_ENV=production
+
+          # Install gems
+          bundle install --deployment --without development test
+
+          # Run migrations
+          bundle exec rails db:migrate
+
+          # Precompile assets
+          bundle exec rails assets:precompile
+
+          # Restart application server (e.g., using systemd or other service)
+          sudo systemctl restart your_app_service
+        ENDSSH
