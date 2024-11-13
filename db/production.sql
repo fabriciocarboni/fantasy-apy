@@ -1,1 +1,1 @@
-CREATE DATABASE fantasi_api_production;
+CREATE DATABASE fantasy_api_production;
