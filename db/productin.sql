@@ -1,0 +1,1 @@
+CREATE DATABASE fantasi_api_production;
