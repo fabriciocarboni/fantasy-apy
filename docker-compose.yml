@@ -20,7 +20,7 @@ services:
     environment:
       PMA_HOST: mariadb
       PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: donotdothisever
     ports:
       - "8080:80"
     depends_on:
