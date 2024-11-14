@@ -50,11 +50,11 @@ RUN bundle exec bootsnap precompile app/ lib/
 FROM base
 
 # Copy built artifacts: gems, application
-COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-COPY --from=build /rails /rails
+COPY --chmod=755 --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --chmod=755 --from=build /rails /rails
 
 # Ensure the entrypoint script has execute permissions
-RUN chmod +x /rails/bin/docker-entrypoint
+# RUN chmod +x /rails/bin/docker-entrypoint
 
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \
