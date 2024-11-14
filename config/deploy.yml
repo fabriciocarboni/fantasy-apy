@@ -21,8 +21,8 @@ proxy:
   ssl: true
   host: api-test.maplebeez.ca
   # Proxy connects to your container on port 80 by default.
-  healthcheck:
-    path: /
+  # healthcheck:
+  #   path: /
 
 # Credentials for your image host.
 registry:
