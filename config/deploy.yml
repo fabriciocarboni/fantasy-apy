@@ -113,12 +113,7 @@ accessories:
       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
     directories:
       - data:/var/lib/mysql
-  # redis:
-  #   image: redis:7.0
-  #   host: 192.168.0.2
-  #   port: 6379
-  #   directories:
-  #     - data:/data
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     host: fantasy_api-db
@@ -127,7 +122,5 @@ accessories:
       clear:
         PMA_HOST: fantasy_api-db
         PMA_PORT: 3306
-        MYSQL_ROOT_PASSWORD:
-          - MYSQL_ROOT_PASSWORD
-    depends_on:
-      - db  # Ensure that phpMyAdmin waits for the database to start
+        secret:
+         - MYSQL_ROOT_PASSWORD
