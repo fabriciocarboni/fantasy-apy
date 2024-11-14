@@ -20,6 +20,7 @@ servers:
 proxy:
   ssl: true
   host: api-test.maplebeez.ca
+  # Proxy connects to your container on port 80 by default.
   healthcheck:
     path: /
 
@@ -99,7 +100,7 @@ builder:
 accessories:
   db:
     image: mysql:8.0
-    host: api-test.maplebeez.ca
+    host: 161.35.53.213
     # Change to 3306 to expose port to the world instead of just local network.
     port: "127.0.0.1:3306:3306"
     # port: "3306"
