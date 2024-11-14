@@ -7,7 +7,7 @@ image: fpcarboni/fantasy_api
 # Deploy to these servers.
 servers:
   web:
-    - 198.199.68.149
+    - api-teset.maplebeez.ca
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -114,13 +114,13 @@ accessories:
     directories:
       - data:/var/lib/mysql
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    host: fantasy_api-db
-    port: "8081:80"  # Exposing a different port to avoid conflicts
-    env:
-      clear:
-        PMA_HOST: fantasy_api-db
-        PMA_PORT: 3306
-        secret:
-         - MYSQL_ROOT_PASSWORD
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin:latest
+  #   host: fantasy_api-db
+  #   port: "8081:80"  # Exposing a different port to avoid conflicts
+  #   env:
+  #     clear:
+  #       PMA_HOST: fantasy_api-db
+  #       PMA_PORT: 3306
+  #       secret:
+  #        - MYSQL_ROOT_PASSWORD
